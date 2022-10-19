@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Facade {
 
 	private int UserType;
@@ -10,8 +12,20 @@ public class Facade {
 
 	private Person thePerson;
 
-	public boolean login() {
-		return false;
+	ArrayList<String> meatProductName=new ArrayList<>();
+	ArrayList<String> produceProductName=new ArrayList<>();
+
+	public void login() {
+		Login l = new Login();
+		int usertype = l.loginFunction();
+		if(usertype==0){
+			//Create user for buyer
+		}
+		else if(usertype==1){
+			//create user for seller
+		}
+
+
 	}
 
 	public void addTrading() {

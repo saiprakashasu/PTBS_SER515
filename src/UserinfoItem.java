@@ -1,4 +1,4 @@
-public class UserinfoItem {
+public class UserInfoItem {
 
 	private OfferingList offeringList;
 
