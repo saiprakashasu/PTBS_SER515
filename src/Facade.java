@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Facade {
 
@@ -17,7 +18,15 @@ public class Facade {
 
 	public void login() {
 		Login l = new Login();
-		int usertype = l.loginFunction();
+		int usertype=-1;
+		String loginInput="1";
+		while(loginInput.equals("1")){
+			usertype = l.loginFunction();
+			System.out.println("Press 1 to login again. Press anything else to terminate program");
+			Scanner sc1=new Scanner(System.in);
+			loginInput=sc1.next();
+
+		}
 		if(usertype==0){
 			//Create user for buyer
 		}
