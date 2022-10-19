@@ -1,11 +1,21 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+
 public class Seller extends Person {
 
+	public Seller()
+	{
+		System.out.println("**************Implementing Bridge Pattern***********");
+		System.out.println("Hello Seller");
+	}
 	public void showMenu() {
 
 	}
 
-	public ProductMenu CreateProductMenu() {
-		return null;
-	}
+	//public void CreateProductMenu() {
+
+
+	//}
 
 }

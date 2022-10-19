@@ -18,21 +18,20 @@ public class Facade {
 
 	public void login() {
 		Login l = new Login();
-		int usertype=-1;
+
 		String loginInput="1";
 		while(loginInput.equals("1")){
-			usertype = l.loginFunction();
+			UserType = l.loginFunction();
+
+			if(UserType==0 || UserType==1) createUser(UserType);
+
 			System.out.println("Press 1 to login again. Press anything else to terminate program");
 			Scanner sc1=new Scanner(System.in);
 			loginInput=sc1.next();
 
 		}
-		if(usertype==0){
-			//Create user for buyer
-		}
-		else if(usertype==1){
-			//create user for seller
-		}
+
+
 
 
 	}
@@ -61,8 +60,15 @@ public class Facade {
 
 	}
 
-	public void createUser(UserInfoItem userinfoitem) {
-
+	public void createUser(int usertype) {
+		if(this.UserType==0) {
+			thePerson = new Buyer();
+			thePerson.CreateProductMenu();
+		}
+		else if(this.UserType==1) {
+			thePerson = new Seller();
+			thePerson.CreateProductMenu();
+		}
 	}
 
 	public void createProuctList() {
