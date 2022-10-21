@@ -6,7 +6,7 @@ public class Seller extends Person {
 
 	public Seller()
 	{
-		System.out.println("**************Implementing Bridge Pattern***********");
+
 		System.out.println("Hello Seller");
 	}
 	public void showMenu() {

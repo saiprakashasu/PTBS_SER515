@@ -1,10 +1,34 @@
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 public class ProductIterator {
 
 	private classProductList classProductList;
+	//public ProductIterator() {
 
-	public boolean hasNext() {
-		return false;
+	//}
+
+	public static Iterator<Integer> range(int start, int end) {
+		return new Iterator<>() {
+			private int index = start;
+
+			@Override
+			public boolean hasNext() {
+				return index<end;
+			}
+
+			@Override
+			public Integer next() {
+				if (!hasNext()) {
+					throw new NoSuchElementException();
+				}
+				return index++;
+			}
+
+		};
 	}
+
 
 	public Product Next() {
 		return null;
@@ -17,5 +41,15 @@ public class ProductIterator {
 	public void Remove() {
 
 	}
+	public static void productIterate(ArrayList<String> productname) {
+		var iterator = range(0, productname.toArray().length);
+		int i=1;
+		System.out.println("Implementing Iterator design pattern");
+		while (iterator.hasNext()) {
+			System.out.println(i+"."+productname.get(iterator.next()));
+			i++;
+		}
+	}
+
 
 }

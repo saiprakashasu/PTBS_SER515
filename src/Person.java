@@ -4,7 +4,9 @@ import java.io.FileReader;
 import java.util.ArrayList;
 
 public class Person {
-
+	public Person(){
+		System.out.println("Bridge Pattern");
+	}
 	ArrayList<String> meatProductName=new ArrayList<>();
 	ArrayList<String> produceProductName=new ArrayList<>();
 	private ProductMenu theProductMenu;
@@ -39,11 +41,11 @@ public class Person {
 				String[] content = line.split(":");
 				if(content[0].equals("Meat")){
 					this.meatProductName.add(content[1]);  //adds products such as beef,pork, mutton
-					System.out.println("added"+content[1]+"in meat product list");
+					System.out.println("added"+content[1]+" in meat product list");
 				}
 				else if(content[0].equals("Produce")){
 					this.produceProductName.add(content[1]);  //adds products such as tomato, onion
-					System.out.println("added"+content[1]+"in produce product list");
+					System.out.println("added"+content[1]+" in produce product list");
 
 				}
 
