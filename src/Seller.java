@@ -1,21 +1,10 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-
 public class Seller extends Person {
-
+	//Buyer class of a user
 	public Seller()
 	{
-
-		System.out.println("Hello Seller");
+		System.out.println("Welcome Seller!");
 	}
 	public void showMenu() {
 
 	}
-
-	//public void CreateProductMenu() {
-
-
-	//}
-
 }

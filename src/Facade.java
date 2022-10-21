@@ -20,12 +20,13 @@ public class Facade {
 
 	private classProductList theProductList;
 
-	private Person thePerson;
+	private Person person;
 
 	ArrayList<String> meatProductName=new ArrayList<>();
 	ArrayList<String> produceProductName=new ArrayList<>();
 
 	public void login() throws IOException {
+		System.out.println("....Facade  pattern....");
 		Login l = new Login();
 
 		String loginInput="1";
@@ -33,17 +34,13 @@ public class Facade {
 			UserType = l.loginFunction();
 			this.username = l.username;
 			if(UserType==0 || UserType==1){
-				createUser(UserType);
+				createUser(UserType);  //Initiating buyer or seller
 				createProductList();
-
-				//System.out.println(meatProductName);
-
 			}
 
 			System.out.println("Press 1 to login again. Press anything else to terminate program");
 			Scanner sc1=new Scanner(System.in);
 			loginInput=sc1.next();
-
 		}
 
 
@@ -75,17 +72,18 @@ public class Facade {
 
 	}
 
+	//Initiating buyer or seller
 	public void createUser(int usertype) {
 		if(this.UserType==0) {
-			thePerson = new Buyer();
-			thePerson.CreateProductMenu();
+			person = new Buyer(); //creating a buyer object
+			person.CreateProductMenu(); //Reads the ProductInfo.txt file and populates them in 2 arrays based on their category
 		}
 		else if(this.UserType==1) {
-			thePerson = new Seller();
-			thePerson.CreateProductMenu();
+			person = new Seller(); //creating a buyer object
+			person.CreateProductMenu(); //Reads the ProductInfo.txt file and populates them in 2 arrays based on their category
 		}
-		meatProductName = thePerson.meatProductName;
-		produceProductName = thePerson.produceProductName;
+		meatProductName = person.meatProductName;
+		produceProductName = person.produceProductName;
 	}
 
 	public void createProductList() throws IOException {
@@ -98,29 +96,23 @@ public class Facade {
 				System.out.println("Menu:  Press 1 for your purchase history and Press 2 to Buy a product");
 				Scanner sc2 = new Scanner(System.in);
 				this.menutype = sc2.next();
-
-				/*if (menutype.equals("1")) {
-					System.out.println("Meat Products");
-					pi.productIterate(meatProductName);
-				} else if (menutype.equals("2")) {
-					System.out.println("Produce Products");
-					pi.productIterate(produceProductName);
-				}*/
+				//Reading UserProduct.txt and displaying purchase history of a buyer
 				if (menutype.equals("1")) {
 					System.out.println(this.username + " has purchased: ");
 					NodeVisitor nv = new NodeVisitor();
 					nv.vistProduct(this.username);
 				}
+				//Writing in case of purchase
 				else if (menutype.equals("2")) {
 					System.out.println("Press 1 to buy meat products and Press 2 to buy produce products");
 					String in = sc2.next();
 					if(in.equals("1")){
-						System.out.println("Factory Method");
+						System.out.println("....Factory Method....");
 						System.out.println("Meat Products");
 						pi.productIterate(meatProductName);
 					}
 					else if(in.equals("2")){
-						System.out.println("Factory Method");
+						System.out.println("....Factory Method....");
 						System.out.println("Produce Products");
 						pi.productIterate(produceProductName);
 					}
@@ -130,19 +122,21 @@ public class Facade {
 					}
 
 					System.out.println("Press the number against the product to buy them");
-					String productBought = sc2.next();
-					int count = Integer.parseInt(sc2.next());
-					File results = new File("src\\textfiles\\UserProduct.txt");
-					FileWriter myWriter = new FileWriter(results);
-					for (int i = 0; i < count; i++) {
-						int z = i + 1;
-						System.out.println("Enter the " + z + " item");
-						String addProduct = sc2.next();
-						String productContent = this.username + ":" + addProduct;
-						NodeVisitor nv = new NodeVisitor();
-						nv.writeProduct(this.username, productContent);
-
+					Integer buyProductIndex = Integer.parseInt(sc2.next());
+					String buyProduct;
+					if(in.equals("1")){
+						buyProduct = meatProductName.get(buyProductIndex-1);
 					}
+					else{
+						buyProduct = produceProductName.get(buyProductIndex-1);
+					}
+					ReminderVistor rv = new ReminderVistor();
+					String productContent = this.username + ":" + buyProduct;
+					NodeVisitor nv = new NodeVisitor();
+					nv.writeProduct(this.username,productContent);
+					System.out.println(buyProduct+" purchased");
+
+
 				}
 				else {
 					System.out.println("Wrong Input");
@@ -159,32 +153,25 @@ public class Facade {
 				System.out.println("Menu: Press 1 for your stock list, press 2 to add to stocks");
 				Scanner sc2 = new Scanner(System.in);
 				this.menutype = sc2.next();
-				/*if (menutype.equals("1")) {
-					System.out.println("Meat Products");
-					pi.productIterate(meatProductName);
-				} else if (menutype.equals("2")) {
-					System.out.println("Produce Products");
-					pi.productIterate(produceProductName);
-				}*/
+				//Reading UserProduct.txt and displaying stocks of a seller
 				if (menutype.equals("1")) {
 					System.out.println(this.username + " seller has stocks: ");
 					NodeVisitor nv = new NodeVisitor();
 					nv.vistProduct(this.username);
 				}
+				//Writing addStock in UserProduct.txt
 				else if (menutype.equals("2")) {
 					System.out.println("How many different items you can to add?");
 					Scanner sc5 = new Scanner(System.in);
 					int count = Integer.parseInt(sc5.next());
-					//File results = new File("src\\textfiles\\UserProduct.txt");
-					//FileWriter myWriter = new FileWriter(results);
 					for (int i = 0; i < count; i++) {
 						int z=i+1;
-						System.out.println("Enter the "+ z +" item");
+						System.out.println("Enter the item "+ z);
 						String addProduct = sc5.next();
 						String productContent = this.username + ":" + addProduct;
 						NodeVisitor nv = new NodeVisitor();
 						nv.writeProduct(this.username,productContent);
-
+						System.out.println(productContent+" Added");
 					}
 				}
 				else {

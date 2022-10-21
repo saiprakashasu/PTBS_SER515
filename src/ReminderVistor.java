@@ -1,5 +1,8 @@
 public class ReminderVistor extends NodeVisitor {
 
+	public ReminderVistor(){
+		System.out.println("....Visitor pattern....");
+	}
 	private Reminder m_Reminder;
 
 	private classProductList classProductList;
