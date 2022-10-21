@@ -4,7 +4,7 @@ Design Patterns used in the project:-
 
 - Facade pattern
 - Bridge pattern
-- Factory Pattern
+- Factory Method Pattern
 - Iterator Pattern
 - Visitor Pattern
 
